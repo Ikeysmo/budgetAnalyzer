@@ -94,29 +94,19 @@ def graphBarSingleExpense(pandas_table, expense_category = None, fig=None):
     print("Done")
 
 
-def graphBarMultiple(pandas_table, fig=None):
-    categories = set(pandas_table["Category"])
+def graphPieChart(pandas_table, title = 'Categories vs Month', amount = 'Cost', labels='Category', groupby = ['Category'], fig=None):
 
-    #filter out work
-    pandas_table = pandas_table[pandas_table["Category"] != "WORK"]
-    pandas_table = pandas_table[pandas_table["Category"] != "Bank"]
-    pandas_table = pandas_table[pandas_table["Category"] != "HOUSE"]
+    categories = set(pandas_table[labels])
 
-    #make numbers positive
-    pandas_table['Cost'] = pandas_table['Cost'].abs()
-
-
-    summ_table = pandas_table.groupby(['Category', 'Month'], as_index=False).sum(numeric_only=True)
-
+    colors = seaborn.color_palette('pastel')[0:len(categories)]
     if not fig:
         fig = plt.figure(figsize=(10,5))
     ax = fig.add_subplot()
     ax.yaxis.set_major_formatter(tick.StrMethodFormatter('${x}'))
 
 
-    aw = seaborn.barplot(data=summ_table, x="Month", y="Cost", hue='Category', width = 1, order=sorted(set(summ_table["Month"])))
-    aw.grid(b=True)
-    aw.set_title("Categories vs Month")
+    aw = plt.pie(x=pandas_table[amount], labels=categories, colors = colors, autopct='%.0f%%')
+    plt.title(title)
     print("Done")
 
 
@@ -131,33 +121,35 @@ def graphThis(pandas_table):
     from datetime import date
 
 
-    mplt = plt.figure(figsize=(10,5))
-    print(type(mplt))
-    graphBarCategoryTotals(pandas_table, mplt)
-
-    mplt2 = plt.figure(figsize=(10,5))
-    graphBarMultiple(pandas_table, mplt2)
-
-    mplt3 = plt.figure(figsize=(10,5))
-    graphBarSingleExpense(pandas_table, "FOOD", mplt3)
-    plt.show()
-
-
-    mplt4 = plt.figure(figsize=(10,5))
-    graphBarSingleExpense(pandas_table, "FOOD", mplt4)
-    plt.show()
+    # mplt = plt.figure(figsize=(10,5))
+    # print(type(mplt))
+    # graphBarCategoryTotals(pandas_table, mplt)
+    #
+    # mplt2 = plt.figure(figsize=(10,5))
+    # graphBarMultiple(pandas_table, mplt2)
+    #
+    # mplt3 = plt.figure(figsize=(10,5))
+    # graphBarSingleExpense(pandas_table, "FOOD", mplt3)
+    # plt.show()
 
 
+    mplt4 = plt.figure(figsize=(10,9))
+    plt.savefig('c:\\temp\\something.png')
+    graphPieChart(pandas_table, mplt4)
+    #plt.show()
 
 
-    if False:
+
+
+    if True:
         prs = Presentation()
 
 
         mypt.add_title_slide(prs, "Budget Analysis", "Study of budget")
-        mypt.add_picture_slide(prs, mplt, "Monthly")
-        mypt.add_picture_slide(prs, mplt2, "Monthly")
-        mypt.add_picture_slide(prs, mplt3, "Monthly")
+        # mypt.add_picture_slide(prs, mplt, "Monthly")
+        # mypt.add_picture_slide(prs, mplt2, "Monthly")
+        # mypt.add_picture_slide(prs, mplt3, "Monthly")
+        mypt.add_picture_with_content_slide(prs, mplt4, "Sum money spent to date")
 
         prs.save('c:\\temp\\myoutput2.pptx')
         import os
