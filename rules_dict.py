@@ -9,7 +9,8 @@ rules_dict = {
         "SNOOZE" : ".*snooze.*",
         "HEB" : "h-e-b",
         "Terry Blacks" : "terry.*black",
-        "Restaurant" : ["(hamburger|hotdog|pizza|chicken|egg|ramen|taco|coffee|kitch|waffle|kebab|juice|sub|turkey|cookie|pancake|gelato|cafe|candy|food|milkshake|rotisserie|grill|burrito|panini|barbeque|barbecue|fudge|gyro)",
+        "WholeFoods" : "WHOLEFDS",
+        "Restaurant" : ["(burger|hotdog|pizza|chicken|egg|ramen|taco|coffee|kitch|waffle|donut|bagel|kebab|juice|sub|turkey|cookie|pancake|gelato|cafe|candy|food|milkshake|rotisserie|grill|burrito|panini|barbeque|barbecue|fudge|gyro|wings|steak|sushi|habibi)",
             "whip my soul",
             "yard house",
             "texas roadhouse",
@@ -17,9 +18,11 @@ rules_dict = {
             "baked.*bear",
             "kok.*wing",
             "nandos.*peri" , #favorite chicken place
+            "mcdonald"
             ],
         "Amy's Ice Cream" : "amy.*ice.*cream",
         "Little Thailand" : "little.*thai",
+        "Saps" : "saps.*thai",
         "Wendy's" : "wendy",
         "Crumble Cookies" : "crumbl",
         "Veracruz Tacos" : "veracruz",
@@ -40,6 +43,10 @@ rules_dict = {
         "Mandola's" : "mandola.*italian",
         "Rouxpour" : "rouxpour",
         "Bojangles" : "bojangles",
+        "Domino's" : "domino",
+        "Island Fork": "island.*fork"
+
+
 
 
 
